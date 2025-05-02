@@ -1,0 +1,15 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''self.sell_cost = math.max(1, math.floor(self.cost/2)) + (self.ability.extra_value or 0)
+    end'''
+match_indent = true
+position = 'after'
+payload = '''if not G.GAME.layaway_used and self.ability.set ~= 'Voucher' then self.cost = 0 end'''
+
+

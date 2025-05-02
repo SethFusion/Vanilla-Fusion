@@ -1,0 +1,17 @@
+{
+  "id": "vanilla_fusion",
+  "name": "Vanilla Fusion",
+  "display_name": "Vanilla Fusion",
+  "author": [ "Seth Fusion" ],
+  "description": "A splash of vanilla from yours truly ;)",
+  "prefix": "vfusion",
+  "main_file": "VanillaFusion.lua",
+  "priority": 0,
+  "badge_colour": "ECE8DD",
+  "badge_text_colour": "000000",
+  "version": "0.0.1",
+  "dependencies": [
+    "Steamodded (>=1.0.0~BETA-0323b)",
+    "Lovely (>=0.6)"
+  ]
+}

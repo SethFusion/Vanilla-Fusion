@@ -1,0 +1,14 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''G.GAME.edition_rate = center_table.extra'''
+match_indent = true
+position = 'at'
+payload = '''G.GAME.edition_rate = G.GAME.edition_rate + 2'''
+
+

@@ -1,0 +1,277 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Lucky card Mult
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if pseudorandom('lucky_mult') < G.GAME.probabilities.normal/5 then
+            self.lucky_trigger = true
+            ret = ret + self.ability.mult'''
+match_indent = true
+position = 'after'
+payload = '''elseif G.GAME.multiverse and pseudorandom('multiverse_lucky_mult') < G.GAME.probabilities.normal/5 then
+    self.lucky_trigger = true
+    card_eval_status_text(
+      self, 'extra', nil, nil, nil,
+      {message = 'Multiverse!', colour = G.C.CHANCE}
+    )
+    ret = ret + self.ability.mult
+'''
+
+# Lucky card money
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''self.lucky_trigger = true
+                ret = ret +  self.ability.p_dollars'''
+match_indent = true
+position = 'after'
+payload = '''elseif G.GAME.multiverse and pseudorandom('multiverse_lucky_money') < G.GAME.probabilities.normal/15 then
+    self.lucky_trigger = true
+    card_eval_status_text(
+      self, 'extra', nil, nil, nil,
+      {message = 'Multiverse!', colour = G.C.CHANCE}
+    )
+    ret = ret +  self.ability.p_dollars
+'''
+
+# Wheel of Fortune
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or pseudorandom('wheel_of_fortune') < G.GAME.probabilities.normal/self.ability.extra then '''
+match_indent = true
+position = 'before'
+payload = '''local prob = false
+local multi = false
+if self.ability.name == 'The Wheel of Fortune' then 
+    prob = pseudorandom('wheel_of_fortune') < G.GAME.probabilities.normal/self.ability.extra
+    multi = pseudorandom('multiverse_wheel_of_fortune') < G.GAME.probabilities.normal/self.ability.extra
+end'''
+
+# Wheel of Fortune
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or pseudorandom('wheel_of_fortune') < G.GAME.probabilities.normal/self.ability.extra then '''
+match_indent = true
+position = 'at'
+payload = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or prob or (G.GAME.multiverse and multi) then
+    if multi and not prob then
+        card_eval_status_text(
+            self, 'extra', nil, nil, nil,
+            {message = 'Multiverse!', colour = G.C.CHANCE}
+       )
+    end'''
+
+# Hallucination
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if pseudorandom('halu'..G.GAME.round_resets.ante) < G.GAME.probabilities.normal/self.ability.extra then
+                    G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'before',
+                        delay = 0.0,
+                        func = (function()
+                                local card = create_card('Tarot',G.consumeables, nil, nil, nil, nil, nil, 'hal')
+                                card:add_to_deck()
+                                G.consumeables:emplace(card)
+                                G.GAME.consumeable_buffer = 0
+                            return true
+                        end)}))
+                    card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})'''
+match_indent = true
+position = 'after'
+payload = '''elseif G.GAME.multiverse and pseudorandom('multiverse_halu'..G.GAME.round_resets.ante) < G.GAME.probabilities.normal/self.ability.extra then
+card_eval_status_text(
+    self, 'extra', nil, nil, nil,
+    {message = 'Multiverse!', colour = G.C.CHANCE}
+)
+G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+G.E_MANAGER:add_event(Event({
+    trigger = 'before',
+    delay = 0.0,
+    func = (function()
+            local card = create_card('Tarot',G.consumeables, nil, nil, nil, nil, nil, 'hal')
+            card:add_to_deck()
+            G.consumeables:emplace(card)
+            G.GAME.consumeable_buffer = 0
+        return true
+    end)}))
+card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})
+'''
+
+# 8 ball
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''end},
+                            colour = G.C.SECONDARY_SET.Tarot,
+                            card = self
+                        }'''
+match_indent = true
+position = 'after'
+payload = '''elseif (G.GAME.multiverse and context.other_card:get_id() == 8) and (pseudorandom('multiverse_8ball') < G.GAME.probabilities.normal/self.ability.extra) then
+card_eval_status_text(
+    self, 'extra', nil, nil, nil,
+    {message = 'Multiverse!', colour = G.C.CHANCE}
+)
+G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+return {
+    extra = {focus = self, message = localize('k_plus_tarot'), func = function()
+        G.E_MANAGER:add_event(Event({
+            trigger = 'before',
+            delay = 0.0,
+            func = (function()
+                    local card = create_card('Tarot',G.consumeables, nil, nil, nil, nil, nil, '8ba')
+                    card:add_to_deck()
+                    G.consumeables:emplace(card)
+                    G.GAME.consumeable_buffer = 0
+                return true
+            end)}))
+    end},
+    colour = G.C.SECONDARY_SET.Tarot,
+    card = self
+}'''
+
+# business card
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''pseudorandom('business') < G.GAME.probabilities.normal/self.ability.extra then
+                        G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + 2
+                        G.E_MANAGER:add_event(Event({func = (function() G.GAME.dollar_buffer = 0; return true end)}))
+                        return {
+                            dollars = 2,
+                            card = self
+                        }'''
+match_indent = true
+position = 'after'
+payload = '''elseif G.GAME.multiverse and self.ability.name == 'Business Card' and
+context.other_card:is_face() and
+pseudorandom('multiverse_business') < G.GAME.probabilities.normal/self.ability.extra then
+    card_eval_status_text(
+        self, 'extra', nil, nil, nil,
+        {message = 'Multiverse!', colour = G.C.CHANCE}
+    )
+    G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + 2
+    G.E_MANAGER:add_event(Event({func = (function() G.GAME.dollar_buffer = 0; return true end)}))
+    return {
+        dollars = 2,
+        card = self
+    }'''
+
+# bloodstone
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''return {
+                        x_mult = self.ability.extra.Xmult,
+                        card = self
+                    }'''
+match_indent = true
+position = 'after'
+payload = '''
+elseif self.ability.name == 'Bloodstone' and context.other_card:is_suit("Hearts") and G.GAME.multiverse and pseudorandom('multiverse_bloodstone') < G.GAME.probabilities.normal/self.ability.extra.odds then
+    card_eval_status_text(
+        self, 'extra', nil, nil, nil,
+        {message = 'Multiverse!', colour = G.C.CHANCE}
+      )
+    return {
+        x_mult = self.ability.extra.Xmult,
+        card = self,
+}'''
+
+# reserved parking
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''return {
+                                dollars = self.ability.extra.dollars,
+                                card = self
+                            }
+                        end'''
+match_indent = true
+position = 'after'
+payload = '''elseif G.GAME.multiverse and self.ability.name == 'Reserved Parking' and
+context.other_card:is_face() and
+pseudorandom('multiverse_parking') < G.GAME.probabilities.normal/self.ability.extra.odds then
+    card_eval_status_text(
+        self, 'extra', nil, nil, nil,
+        {message = 'Multiverse!', colour = G.C.CHANCE}
+    )
+    if context.other_card.debuff then
+        return {
+            message = localize('k_debuffed'),
+            colour = G.C.RED,
+            card = self,
+        }
+    else
+        G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + self.ability.extra.dollars
+        G.E_MANAGER:add_event(Event({func = (function() G.GAME.dollar_buffer = 0; return true end)}))
+        return {
+            dollars = self.ability.extra.dollars,
+            card = self
+        }
+    end'''
+    
+# space joker
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if self.ability.name == 'Space Joker' and pseudorandom('space') < G.GAME.probabilities.normal/self.ability.extra then
+                        return {
+                            card = self,
+                            level_up = true,
+                            message = localize('k_level_up_ex')
+                        }'''
+match_indent = true
+position = 'after'
+payload = '''elseif G.GAME.multiverse and self.ability.name == 'Space Joker' and pseudorandom('multiverse_space') < G.GAME.probabilities.normal/self.ability.extra then
+card_eval_status_text(
+    self, 'extra', nil, nil, nil,
+    {message = 'Multiverse!', colour = G.C.CHANCE}
+)
+return {
+    card = self,
+    level_up = true,
+    message = localize('k_level_up_ex')
+}'''
+
+# gros michel and canvedish
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''message = localize('k_extinct_ex')
+                        }'''
+match_indent = true
+position = 'after'
+payload = '''elseif G.GAME.multiverse and pseudorandom('multiverse_banana') < G.GAME.probabilities.normal/self.ability.extra.odds then 
+card_eval_status_text(
+    self, 'extra', nil, nil, nil,
+    {message = 'Multiverse!', colour = G.C.CHANCE}
+)
+G.E_MANAGER:add_event(Event({
+    func = function()
+        play_sound('tarot1')
+        self.T.r = -0.2
+        self:juice_up(0.3, 0.4)
+        self.states.drag.is = true
+        self.children.center.pinch.x = true
+        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
+            func = function()
+                    G.jokers:remove_card(self)
+                    self:remove()
+                    self = nil
+                return true; end})) 
+        return true
+    end
+})) 
+if self.ability.name == 'Gros Michel' then G.GAME.pool_flags.gros_michel_extinct = true end
+return {
+    message = localize('k_extinct_ex')
+}'''

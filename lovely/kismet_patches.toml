@@ -1,0 +1,51 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''--G.STATE == G.STATES.BLIND_SELECT'''
+match_indent = true
+position = 'before'
+payload = '''or G.GAME.kismet'''
+
+# ahnk
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if not v.ability.eternal then deletable_jokers[#deletable_jokers + 1] = v end'''
+match_indent = true
+position = 'at'
+payload = '''if not v.ability.eternal and not G.GAME.kismet then deletable_jokers[#deletable_jokers + 1] = v end'''
+
+# hex
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if v ~= eligible_card and (not v.ability.eternal) then v:start_dissolve(nil, _first_dissolve);_first_dissolve = true end'''
+match_indent = true
+position = 'at'
+payload = '''if not G.GAME.kismet and v ~= eligible_card and (not v.ability.eternal) then v:start_dissolve(nil, _first_dissolve);_first_dissolve = true end'''
+
+# madness
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if G.jokers.cards[i] ~= self and not G.jokers.cards[i].ability.eternal and not G.jokers.cards[i].getting_sliced then destructable_jokers[#destructable_jokers+1] = G.jokers.cards[i] end'''
+match_indent = true
+position = 'at'
+payload = '''if not G.GAME.kismet and G.jokers.cards[i] ~= self and not G.jokers.cards[i].ability.eternal and not G.jokers.cards[i].getting_sliced then destructable_jokers[#destructable_jokers+1] = G.jokers.cards[i] end'''
+
+# dagger
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if my_pos and G.jokers.cards[my_pos+1] and not self.getting_sliced and not G.jokers.cards[my_pos+1].ability.eternal and not G.jokers.cards[my_pos+1].getting_sliced then'''
+match_indent = true
+position = 'at'
+payload = '''if not G.GAME.kismet and my_pos and G.jokers.cards[my_pos+1] and not self.getting_sliced and not G.jokers.cards[my_pos+1].ability.eternal and not G.jokers.cards[my_pos+1].getting_sliced then'''
+
+
+
