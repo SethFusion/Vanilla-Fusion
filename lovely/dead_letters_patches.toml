@@ -138,3 +138,13 @@ position = 'before'
 payload = '''
 table.insert(G.GAME.dead_letters_buffer, self.ability.extra.dollars)
 '''
+# Rough gem
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''context.other_card:is_suit("Diamonds") then'''
+match_indent = true
+position = 'after'
+payload = '''
+    table.insert(G.GAME.dead_letters_buffer, self.ability.extra)
+'''
