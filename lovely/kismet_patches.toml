@@ -47,5 +47,12 @@ match_indent = true
 position = 'at'
 payload = '''if not G.GAME.kismet and my_pos and G.jokers.cards[my_pos+1] and not self.getting_sliced and not G.jokers.cards[my_pos+1].ability.eternal and not G.jokers.cards[my_pos+1].getting_sliced then'''
 
-
+# hanged man
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if self.ability.consumeable.mod_num >= #G.hand.highlighted and #G.hand.highlighted >= (self.ability.consumeable.min_highlighted or 1) then'''
+match_indent = true
+position = 'before'
+payload = '''if self.ability.name == 'The Hanged Man' and G.GAME.kismet then return false end'''
 
