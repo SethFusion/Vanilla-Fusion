@@ -1,7 +1,7 @@
 # Welcome to Vanilla Fusion!
 ## What is this?
 
-A vanilla-esque mod for Balatro currently featuring 30 jokers and 1 spectral card.
+A vanilla-_focused_ mod for Balatro currently featuring 30 jokers and 1 spectral card.
 
 ## Why is this?
 
