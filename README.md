@@ -3,22 +3,9 @@
 
 A vanilla-_focused_ mod for Balatro currently featuring 30 jokers and 1 spectral card.
 
-## Why is this?
-
-I started making this mod on a whim when I learned you could access Balatro's source code with almost no effort. Unfortunately, I fell in love with LUA (I've never touched it before) and Balatro's source code, so I decided to just keep adding stuff as long as I was having fun! 
-
-## How is this?
-
-When I started VF, I didn't know there were many Balatro mods out there. I had only ever heard of Cryptid, and that wasn't my speed. Still, I decided to ignore other mods and ideas from Reddit, hoping to come up with my own unique ideas that others weren't implementing. The only resources I used were the SMODS wiki, occasional Discord questions, and even rarer peeks at Cryptid source code. I _hope_ this has led to some ideas the community has not seen before. If not, oh well. I still had fun.
-
-I will say I did quite a bit of lovely patching with this mod, so I'm not sure how well it will play with other mods.
-
-Let me also say I am not an artist, and none of these jokers have art yet :(
-(Except for one, which I was fairly proud of)
-
 ## What's _in_ this?
 
-Here's a rundown of everything currently implemented
+Here's a rundown of everything currently implemented (most of them do _not_ have art yet as I am a terrible artist)
 #### Common Jokers
 * [x] Jimbo's Timer - Gains 15 chips every round. At 60, converts into 12 Mult
 * [x] Betting on Low - 1 in 3 chance to create a Pluto, Mercury, or Uranus every hand
@@ -55,6 +42,20 @@ Here's a rundown of everything currently implemented
 * [x] Mischief - Removes editions from all jokers and cards when blind is selected. Gains x2 Mult for every edition removed. (Negative excluded)
 #### Spectral Cards
 * [X] Dredge - Remove edition from selected joker or card, replace with a random edition
+
+## Why is this?
+
+I started making this mod on a whim when I learned you could access Balatro's source code with almost no effort. Unfortunately, I fell in love with LUA (I've never touched it before) and Balatro's source code, so I decided to just keep adding stuff as long as I was having fun! 
+
+## How is this?
+
+When I started VF, I didn't know there were many Balatro mods out there. I had only ever heard of Cryptid, and that wasn't my speed. Still, I decided to ignore other mods and ideas from Reddit, hoping to come up with my own unique ideas that others weren't implementing. The only resources I used were the SMODS wiki, occasional Discord questions, and even rarer peeks at Cryptid source code. I _hope_ this has led to some ideas the community has not seen before. If not, oh well. I still had fun.
+
+I will say I did quite a bit of lovely patching with this mod, so I'm not sure how well it will play with other mods.
+
+Let me also say I am not an artist, and none of these jokers have art yet :(
+(Except for one, which I was fairly proud of)
+
 
 ## What's next?
 
