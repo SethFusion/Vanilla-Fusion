@@ -1,9 +1,11 @@
 # Welcome to Vanilla Fusion!
 ## What is this?
 
-A vanilla-_focused_ mod for Balatro currently featuring 30 jokers and 1 spectral card.
+A vanilla-_focused_ mod for Balatro currently featuring 30 jokers and 3 spectral cards. Balance, theming, and 'non-clutter' are heavily considered, open to balancing suggestions, still a WIP 
 
 ## What's _in_ this?
+
+Vanilla Fusion is structured as an 'à la carte' mod. If there is a particular part of the mod you don't like or don't want to see, just delete its file. Just make sure to delete any associated patches as well. 
 
 Here's a rundown of everything currently implemented (most of them do _not_ have art yet as I am a terrible artist)
 #### Common Jokers
@@ -26,7 +28,7 @@ Here's a rundown of everything currently implemented (most of them do _not_ have
 * [x] Jack of Speed - Every played card has a 1 in 4 chance to become a Jack. Played jacks have a 1 in 4 chance to become glass
 * [x] Countdown - Every scored 10 reduces countdown by 1. Gain 0.5x mult when it reaches 0
 * [x] Midway - Scored 5s swap current chips and mult
-* [x] Jackpot - Shop size increases by the number of 7s in the winning hand
+* [x] Jackpot - Shop size temporarily increases by the number of 7s in your winning hand
 * [x] Kismet - Gain 1 joker slot after beating boss blind, no cards can be destroyed or sold
 #### Rare Jokers
 * [x] Minefield - 1 in 8 chance to de-level most played hand and create a spectral card
@@ -36,12 +38,14 @@ Here's a rundown of everything currently implemented (most of them do _not_ have
 * [x] Benediction - scored cards have a 1 in 5 chance to gain an enhancement and a 1 in 20 chance to gain an edition
 #### Legendary Jokers
 * [x] Stańczyk - All cards in the shop are guaranteed to have an edition
-* [x] Etteilla - Gain 0.2x mult for every tarot card used this run
-* [x] Kepler - Every hand played creates a negative planet card of that hand
+* [x] Etteilla - Using a Tarot card spawns 1 copy of that card
+* [x] Kepler - Playing cards with a Blue Seal gain 0.5x held-in-hand Mult when their Blue Seal triggers
 * [x] Bentov - All editionless jokers become negative when this card is sold
 * [x] Mischief - Removes editions from all jokers and cards when blind is selected. Gains x2 Mult for every edition removed. (Negative excluded)
 #### Spectral Cards
 * [X] Dredge - Remove edition from selected joker or card, replace with a random edition
+* [X] Epoch - Select an enhanced card. Add its enhancement as a permanent bonus and remove enhancement (Wild and Probabilities excluded)
+* [X] Apport - Creates up to two random Spectral cards
 
 ## Why is this?
 
@@ -51,14 +55,14 @@ I started making this mod on a whim when I learned you could access Balatro's so
 
 When I started VF, I didn't know there were many Balatro mods out there. I had only ever heard of Cryptid, and that wasn't my speed. Still, I decided to ignore other mods and ideas from Reddit, hoping to come up with my own unique ideas that others weren't implementing. The only resources I used were the SMODS wiki, occasional Discord questions, and even rarer peeks at Cryptid source code. I _hope_ this has led to some ideas the community has not seen before. If not, oh well. I still had fun.
 
-I will say I did quite a bit of lovely patching with this mod, so I'm not sure how well it will play with other mods.
+My philosophy for this mod is to only add things that give the game value, and more stuff =/= value. I totally understand the appeal of just putting stuff in the game, but when I start a run, I don't want every joker I come across to be silly, useless, or hyperspecific. Even jokers that are fun, interesting, or useful don't necessarily add _value_ to the game if there's just _too much stuff_ (you'll see a few jokers in the Outdated folder that fit this. I've decided to let them be public if anyone is interested, and I expect this folder to grow over time). 
 
-Let me also say I am not an artist, and none of these jokers have art yet :(
-(Except for one, which I was fairly proud of)
+I will say I did quite a bit of lovely patching with this mod, so I'm not sure how well it will play with other mods. 
 
+Let me also say I am not an artist, and none of these jokers have art yet :( Except for one, which I was fairly proud of.
 
 ## What's next?
 
 I would like to get feedback and testing for these cards and, if they feel right, complete them with art. I'm not sure who to reach out to for art, if you are interested or know someone who might be interested, please message me!
 
-I am also open to suggestions for tweaks, changes, or completely new ideas. That being said, I'm mostly interested in feedback relating to _how fun_ these jokers are. Basically, are they fun enough to be in the game at all? I intentionally made some of them rather good, and others rather meh because that's how vanilla works. Some cards are always on the 'take' list, some are circumstantial, and some are almost always a pass unless in a really specific scenario. Some are better toward the beginning of the game to help you get on your feet, others are only good near the boss blind. You get the idea, and I think that's how it _should_ be. :) 
+I am also open to suggestions for tweaks, changes, or completely new ideas. I intentionally made some of the jokers rather good, and others rather meh, because that's how vanilla works. Some cards are always on the 'take' list, some are circumstantial, and some are almost always a pass unless in a really specific scenario. Some are better toward the beginning of the game to help you get on your feet, others are only good near the boss blind. You get the idea, and I think that's how it _should_ be. :) 
