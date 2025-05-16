@@ -31,7 +31,7 @@ SMODS.Joker {
           local multiverse = pseudorandom('multiverse_ben_enhanc') < (G.GAME.probabilities.normal / card.ability.extra.enh_odds_upper)
           if num or (G.GAME.multiverse and multiverse) then
             if (G.GAME.multiverse and multiverse) and not num then
-                card_eval_status_text(
+              card_eval_status_text(
                 card, 'extra', nil, nil, nil,
                 {message = 'Multiverse!', colour = G.C.CHANCE}
               )
