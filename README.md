@@ -1,7 +1,8 @@
 # Welcome to Vanilla Fusion!
 ## What is this?
 
-A vanilla-_focused_ mod for Balatro currently featuring 30 jokers and 3 spectral cards. Balance, theming, and 'non-clutter' are heavily considered, open to balancing suggestions, still a WIP 
+A vanilla-_focused_ mod for Balatro currently featuring 30 jokers and 3 spectral cards. Balance, theming, and 'non-clutter' are heavily considered, open to balancing suggestions, still a WIP.
+Requires [Steammodded](https://github.com/Steamodded/smods) and [Lovely](https://github.com/ethangreen-dev/lovely-injector)
 
 ## What's _in_ this?
 
