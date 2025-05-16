@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# this patches Hiker to display the 'buffed' sticker, granted to any playing
+# card that has unseen perma bonuses
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + self.ability.extra'''
+match_indent = true
+position = 'after'
+payload = '''context.other_card.ability['vfusion_buffed'] = 'vfusion_buffed''''
+
+

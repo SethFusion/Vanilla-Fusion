@@ -62,7 +62,7 @@ return {
         name = 'Layaway',
         text = {
           "The first item bought in the",
-          "shop isn't payed for until",
+          "shop isn't paid for until",
           "the end of the next round",
           "{C:inactive}(#1#)"
         }
@@ -221,9 +221,9 @@ return {
       j_vfusion_etteilla = {
         name = 'Etteilla',
         text = {
-          "Gain {X:mult,C:white}X#1#{} Mult for every",
-          "used {C:tarot}Tarot{} card this run",
-          "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
+          "Using a {C:tarot}Tarot{} card",
+          "creates a single {C:attention}copy{}",
+          "of that card"
         },
         unlock={
           "{E:1,s:1.3}?????",
@@ -242,8 +242,9 @@ return {
       j_vfusion_kepler = {
         name = 'Kepler',
         text = {
-          "Every hand played creates a ",
-          "{C:dark_edition}negative{} {C:planet}Planet{} card of that hand"
+          "Playing cards with a {C:planet}Blue Seal{}",
+          "gain {X:mult,C:white}0.5X{} held-in-hand Mult",
+          "when their {C:planet}Blue Seal{} triggers"
         },
         unlock={
           "{E:1,s:1.3}?????",
@@ -272,6 +273,15 @@ return {
         }
       }
     },
+    Other = {
+      vfusion_buffed={
+        name="Buffed",
+        text={
+          "This card has been",
+          "given {C:attention}permanent{} buffs",
+        }
+      }
+    },
     Spectral={
       c_vfusion_dredge={
         name='Dredge',
@@ -281,10 +291,31 @@ return {
           "replace it with a {C:dark_edition}random{} {C:attention}Edition{}",
           "{C:inactive}({C:dark_edition}negative {C:inactive}excluded)"
         }
+      },
+      c_vfusion_epoch={
+        name='Epoch',
+        text={
+          "Select an {C:attention}enhanced card{}.",
+          " Add it's enhancement",
+          "as a {C:attention}permanent bonus{}",
+          " and remove enhancement",
+          "{C:inactive}(Wild and Probabilities excluded){}"
+        }
+      },
+      c_vfusion_apport={
+        name='Apport',
+        text={
+          "Creates up to {C:attention}2",
+          "random {C:spectral}Spectral{} cards",
+          "{C:inactive}(Must have room)"
+        }
       }
     }
   },
   misc={
+    labels={
+      vfusion_buffed='Buffed'
+    },
     v_dictionary={
       shareholder_interest="#1#x Blind Score = $#2#"
     }
