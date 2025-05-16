@@ -9,7 +9,7 @@ target = 'card.lua'
 pattern = '''if obj.use and type(obj.use) == 'function' then'''
 match_indent = true
 position = 'before'
-payload = '''-- vf etteilla patch
+payload = '''-- vf_patch etteilla
 if G.GAME.etteilla and not self.etteilla and self.ability.set == 'Tarot' then
   local etts = SMODS.find_card('j_vfusion_etteilla')
   for i = 1, #etts or 1 do
@@ -33,6 +33,6 @@ if G.GAME.etteilla and not self.etteilla and self.ability.set == 'Tarot' then
     end
   end
 end
--- /vf etteilla patch'''
+-- / vf_patch etteilla'''
 
 

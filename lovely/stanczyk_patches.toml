@@ -9,6 +9,8 @@ target = 'card.lua'
 pattern = '''G.GAME.edition_rate = center_table.extra'''
 match_indent = true
 position = 'at'
-payload = '''G.GAME.edition_rate = G.GAME.edition_rate + 2'''
+payload = '''-- vf_patch stanczyk
+G.GAME.edition_rate = G.GAME.edition_rate + 2
+-- / vf_patch stanczyk'''
 
 

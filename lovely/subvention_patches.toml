@@ -9,4 +9,6 @@ target = 'tag.lua'
 pattern = '''function Tag:yep(message, _colour, func)'''
 match_indent = true
 position = 'after'
-payload = '''G.GAME.used_tag_count = G.GAME.used_tag_count + 1'''
+payload = '''-- vf_patch subvention
+G.GAME.used_tag_count = G.GAME.used_tag_count + 1
+-- / vf_patch subvention'''

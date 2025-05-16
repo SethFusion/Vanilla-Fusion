@@ -12,14 +12,15 @@ pattern = '''if pseudorandom('lucky_mult') < G.GAME.probabilities.normal/5 then
             ret = ret + self.ability.mult'''
 match_indent = true
 position = 'after'
-payload = '''elseif G.GAME.multiverse and pseudorandom('multiverse_lucky_mult') < G.GAME.probabilities.normal/5 then
+payload = '''-- vf_patch multiverse
+elseif G.GAME.multiverse and pseudorandom('multiverse_lucky_mult') < G.GAME.probabilities.normal/5 then
     self.lucky_trigger = true
     card_eval_status_text(
       self, 'extra', nil, nil, nil,
       {message = 'Multiverse!', colour = G.C.CHANCE}
     )
     ret = ret + self.ability.mult
-'''
+-- / vf_patch multiverse'''
 
 # Lucky card money
 [[patches]]
@@ -29,14 +30,15 @@ pattern = '''self.lucky_trigger = true
                 ret = ret +  self.ability.p_dollars'''
 match_indent = true
 position = 'after'
-payload = '''elseif G.GAME.multiverse and pseudorandom('multiverse_lucky_money') < G.GAME.probabilities.normal/15 then
+payload = '''-- vf_patch multiverse
+elseif G.GAME.multiverse and pseudorandom('multiverse_lucky_money') < G.GAME.probabilities.normal/15 then
     self.lucky_trigger = true
     card_eval_status_text(
       self, 'extra', nil, nil, nil,
       {message = 'Multiverse!', colour = G.C.CHANCE}
     )
     ret = ret +  self.ability.p_dollars
-'''
+-- / vf_patch multiverse'''
 
 # Wheel of Fortune
 [[patches]]
@@ -45,12 +47,14 @@ target = 'card.lua'
 pattern = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or pseudorandom('wheel_of_fortune') < G.GAME.probabilities.normal/self.ability.extra then '''
 match_indent = true
 position = 'before'
-payload = '''local prob = false
+payload = '''-- vf_patch multiverse
+local prob = false
 local multi = false
 if self.ability.name == 'The Wheel of Fortune' then 
     prob = pseudorandom('wheel_of_fortune') < G.GAME.probabilities.normal/self.ability.extra
     multi = pseudorandom('multiverse_wheel_of_fortune') < G.GAME.probabilities.normal/self.ability.extra
-end'''
+end
+-- / vf_patch multiverse'''
 
 # Wheel of Fortune
 [[patches]]
@@ -59,13 +63,15 @@ target = 'card.lua'
 pattern = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or pseudorandom('wheel_of_fortune') < G.GAME.probabilities.normal/self.ability.extra then '''
 match_indent = true
 position = 'at'
-payload = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or prob or (G.GAME.multiverse and multi) then
+payload = '''-- vf_patch multiverse
+if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or prob or (G.GAME.multiverse and multi) then
     if multi and not prob then
         card_eval_status_text(
             self, 'extra', nil, nil, nil,
             {message = 'Multiverse!', colour = G.C.CHANCE}
        )
-    end'''
+    end
+-- / vf_patch multiverse'''
 
 # Hallucination
 [[patches]]
@@ -86,7 +92,8 @@ pattern = '''if pseudorandom('halu'..G.GAME.round_resets.ante) < G.GAME.probabil
                     card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})'''
 match_indent = true
 position = 'after'
-payload = '''elseif G.GAME.multiverse and pseudorandom('multiverse_halu'..G.GAME.round_resets.ante) < G.GAME.probabilities.normal/self.ability.extra then
+payload = '''-- vf_patch multiverse
+elseif G.GAME.multiverse and pseudorandom('multiverse_halu'..G.GAME.round_resets.ante) < G.GAME.probabilities.normal/self.ability.extra then
 card_eval_status_text(
     self, 'extra', nil, nil, nil,
     {message = 'Multiverse!', colour = G.C.CHANCE}
@@ -103,7 +110,7 @@ G.E_MANAGER:add_event(Event({
         return true
     end)}))
 card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})
-'''
+-- / vf_patch multiverse'''
 
 # 8 ball
 [[patches]]
@@ -115,7 +122,8 @@ pattern = '''end},
                         }'''
 match_indent = true
 position = 'after'
-payload = '''elseif (G.GAME.multiverse and context.other_card:get_id() == 8) and (pseudorandom('multiverse_8ball') < G.GAME.probabilities.normal/self.ability.extra) then
+payload = '''-- vf_patch multiverse
+elseif (G.GAME.multiverse and context.other_card:get_id() == 8) and (pseudorandom('multiverse_8ball') < G.GAME.probabilities.normal/self.ability.extra) then
 card_eval_status_text(
     self, 'extra', nil, nil, nil,
     {message = 'Multiverse!', colour = G.C.CHANCE}
@@ -136,7 +144,8 @@ return {
     end},
     colour = G.C.SECONDARY_SET.Tarot,
     card = self
-}'''
+}
+-- / vf_patch multiverse'''
 
 # business card
 [[patches]]
@@ -151,7 +160,8 @@ pattern = '''pseudorandom('business') < G.GAME.probabilities.normal/self.ability
                         }'''
 match_indent = true
 position = 'after'
-payload = '''elseif G.GAME.multiverse and self.ability.name == 'Business Card' and
+payload = '''-- vf_patch multiverse
+elseif G.GAME.multiverse and self.ability.name == 'Business Card' and
 context.other_card:is_face() and
 pseudorandom('multiverse_business') < G.GAME.probabilities.normal/self.ability.extra then
     card_eval_status_text(
@@ -163,7 +173,8 @@ pseudorandom('multiverse_business') < G.GAME.probabilities.normal/self.ability.e
     return {
         dollars = 2,
         card = self
-    }'''
+    }
+-- / vf_patch multiverse'''
 
 # bloodstone
 [[patches]]
@@ -175,7 +186,7 @@ pattern = '''return {
                     }'''
 match_indent = true
 position = 'after'
-payload = '''
+payload = '''-- vf_patch multiverse
 elseif self.ability.name == 'Bloodstone' and context.other_card:is_suit("Hearts") and G.GAME.multiverse and pseudorandom('multiverse_bloodstone') < G.GAME.probabilities.normal/self.ability.extra.odds then
     card_eval_status_text(
         self, 'extra', nil, nil, nil,
@@ -184,7 +195,8 @@ elseif self.ability.name == 'Bloodstone' and context.other_card:is_suit("Hearts"
     return {
         x_mult = self.ability.extra.Xmult,
         card = self,
-}'''
+}
+-- / vf_patch multiverse'''
 
 # reserved parking
 [[patches]]
@@ -197,7 +209,8 @@ pattern = '''return {
                         end'''
 match_indent = true
 position = 'after'
-payload = '''elseif G.GAME.multiverse and self.ability.name == 'Reserved Parking' and
+payload = '''-- vf_patch multiverse
+elseif G.GAME.multiverse and self.ability.name == 'Reserved Parking' and
 context.other_card:is_face() and
 pseudorandom('multiverse_parking') < G.GAME.probabilities.normal/self.ability.extra.odds then
     card_eval_status_text(
@@ -217,7 +230,8 @@ pseudorandom('multiverse_parking') < G.GAME.probabilities.normal/self.ability.ex
             dollars = self.ability.extra.dollars,
             card = self
         }
-    end'''
+    end
+-- / vf_patch multiverse'''
     
 # space joker
 [[patches]]
@@ -231,7 +245,8 @@ pattern = '''if self.ability.name == 'Space Joker' and pseudorandom('space') < G
                         }'''
 match_indent = true
 position = 'after'
-payload = '''elseif G.GAME.multiverse and self.ability.name == 'Space Joker' and pseudorandom('multiverse_space') < G.GAME.probabilities.normal/self.ability.extra then
+payload = '''-- vf_patch multiverse
+elseif G.GAME.multiverse and self.ability.name == 'Space Joker' and pseudorandom('multiverse_space') < G.GAME.probabilities.normal/self.ability.extra then
 card_eval_status_text(
     self, 'extra', nil, nil, nil,
     {message = 'Multiverse!', colour = G.C.CHANCE}
@@ -240,7 +255,8 @@ return {
     card = self,
     level_up = true,
     message = localize('k_level_up_ex')
-}'''
+}
+-- / vf_patch multiverse'''
 
 # gros michel and canvedish
 [[patches]]
@@ -250,7 +266,8 @@ pattern = '''message = localize('k_extinct_ex')
                         }'''
 match_indent = true
 position = 'after'
-payload = '''elseif G.GAME.multiverse and pseudorandom('multiverse_banana') < G.GAME.probabilities.normal/self.ability.extra.odds then 
+payload = '''-- vf_patch multiverse
+elseif G.GAME.multiverse and pseudorandom('multiverse_banana') < G.GAME.probabilities.normal/self.ability.extra.odds then 
 card_eval_status_text(
     self, 'extra', nil, nil, nil,
     {message = 'Multiverse!', colour = G.C.CHANCE}
@@ -274,4 +291,5 @@ G.E_MANAGER:add_event(Event({
 if self.ability.name == 'Gros Michel' then G.GAME.pool_flags.gros_michel_extinct = true end
 return {
     message = localize('k_extinct_ex')
-}'''
+}
+--/  vf_patch multiverse'''

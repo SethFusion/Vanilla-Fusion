@@ -9,8 +9,10 @@ target = 'card.lua'
 pattern = '''self.sell_cost = math.max(1, math.floor(self.cost/2)) + (self.ability.extra_value or 0)'''
 match_indent = true
 position = 'at'
-payload = '''if G.GAME.art then
+payload = '''-- vf_patch art_deal
+if G.GAME.art then
   self.sell_cost = math.max(1, math.floor(self.cost)) + (self.ability.extra_value or 0)
 else
   self.sell_cost = math.max(1, math.floor(self.cost/2)) + (self.ability.extra_value or 0)
-end'''
+end
+-- / vf_patch art_deal'''
