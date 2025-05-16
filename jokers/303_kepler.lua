@@ -1,11 +1,11 @@
 
 -- Legendary Joker
--- Every hand played creates a negative planet card of that hand
+-- Playing cards with a Blue Seal gain 0.5x held-in-hand Mult when their Blue Seal triggers
 SMODS.Joker {
   key = 'kepler',
   unlocked = true,
   discovered = false,
-  blueprint_compat = true,
+  blueprint_compat = false,
   eternal_compat = true,
   perishable_compat = true,
   config = { extra = {  } },
@@ -14,53 +14,23 @@ SMODS.Joker {
   pos = { x = 2, y = 1 },
   cost = 10,
   loc_vars = function(self, info_queue, card)
+    info_queue[#info_queue + 1] = G.P_SEALS.Blue
     return { vars = {  } }
   end,
   
   calculate = function(self, card, context)
-    -- hand played trigger
-    if context.before then
-      -- default mercury in case we run into an issue
-      local keystr = 'c_mercury'
-      
-      if context.scoring_name == 'Three of a Kind' then
-        keystr = 'c_venus'
-      elseif context.scoring_name == 'Full House' then
-        keystr = 'c_earth'
-      elseif context.scoring_name == 'Four of a Kind' then
-        keystr = 'c_mars'
-      elseif context.scoring_name == 'Flush' then
-        keystr = 'c_jupiter'
-      elseif context.scoring_name == 'Straight' then
-        keystr = 'c_saturn'
-      elseif context.scoring_name == 'Two Pair' then
-        keystr = 'c_uranus'
-      elseif context.scoring_name == 'Stright Flush' then
-        keystr = 'c_neptune'
-      elseif context.scoring_name == 'High Card' then
-        keystr = 'c_pluto'
-      elseif context.scoring_name == 'Five of a Kind' then
-        keystr = 'c_planet_x'
-      elseif context.scoring_name == 'Flush House' then
-        keystr = 'c_ceres'
-      elseif context.scoring_name == 'Flush Five' then
-        keystr = 'c_eris'
-      end
-      
-      G.E_MANAGER:add_event(Event({
-        func = function()
-          SMODS.add_card({
-            set = 'Spectral', 
-            area = G.consumeables, 
-            skip_materialize = false, 
-            key = keystr,
-            key_append = 'kepler', 
-            no_edition = true,
-            edition = 'e_negative'
-          })
-        return true
-        end
-      }))
+    local played_card = context.other_card
+    -- end of round individual card trigger
+    if context.end_of_round and context.individual and played_card:get_seal() == 'Blue' then
+      played_card:juice_up()
+      played_card.ability.perma_h_x_mult = played_card.ability.perma_h_x_mult + 0.5
+      -- add buffed sticker visual
+      played_card.ability['vfusion_buffed'] = 'vfusion_buffed'
+        
+      card_eval_status_text(
+        played_card, 'extra', nil, nil, nil,
+        {message = 'X'..(played_card.ability.perma_h_x_mult + 1) , colour = G.C.MULT}
+      )
     end
   end
 }
