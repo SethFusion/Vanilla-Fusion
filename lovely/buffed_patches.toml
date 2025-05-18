@@ -15,16 +15,17 @@ payload = '''-- vf_patch buffed
 context.other_card.ability['vfusion_buffed'] = 'vfusion_buffed'
 -- / vf_patch buffed patch'''
 
-# this patches Death to correctly copy sticker
+# this patches copy_card to correctly copy sticker
 [[patches]]
 [patches.pattern]
-target = 'card.lua'
-pattern = '''if G.hand.highlighted[i] ~= rightmost then
-                        copy_card(rightmost, G.hand.highlighted[i])
-                    end'''
+target = 'functions/common_events.lua'
+pattern = '''if other.params then
+        new_card.params = other.params
+        new_card.params.playing_card = playing_card
+    end'''
 match_indent = true
 position = 'after'
 payload = '''-- vf_patch buffed
-G.hand.highlighted[i].ability['vfusion_buffed'] = rightmost.ability['vfusion_buffed'] or nil
+new_card.ability['vfusion_buffed'] = other.ability['vfusion_buffed'] or nil
 -- / vf_patch buffed patch'''
 

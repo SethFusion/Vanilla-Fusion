@@ -36,7 +36,6 @@ SMODS.Consumable({
     for i = 1, #G.hand.highlighted do
       G.E_MANAGER:add_event(Event({ trigger = "after", delay = 0.25, func = function() 
         copy_card(copier, G.hand.highlighted[i])
-        G.hand.highlighted[i].ability['vfusion_buffed'] = copier.ability['vfusion_buffed'] or nil
       return true end }))
     end
     
