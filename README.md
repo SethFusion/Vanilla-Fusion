@@ -1,7 +1,7 @@
 # Welcome to Vanilla Fusion!
 ## What is this?
 
-A vanilla-_focused_ mod for Balatro currently featuring 30 jokers and 3 spectral cards. Balance, theming, and 'non-clutter' are heavily considered, open to balancing suggestions, still a WIP.
+A vanilla-_focused_ mod for Balatro currently featuring 30 jokers and 4 spectral cards. Balance, theming, and 'non-clutter' are heavily considered, open to balancing suggestions, still a WIP.
 Requires [Steamodded](https://github.com/Steamodded/smods) and [Lovely](https://github.com/ethangreen-dev/lovely-injector)
 
 ## What's _in_ this?
@@ -45,8 +45,9 @@ Here's a rundown of everything currently implemented (most of them do _not_ have
 * [x] Mischief - Removes editions from all jokers and cards when blind is selected. Gains x2 Mult for every edition removed. (Negative excluded)
 #### Spectral Cards
 * [X] Dredge - Remove edition from selected joker or card, replace with a random edition
-* [X] Epoch - Select an enhanced card. Add its enhancement as a permanent bonus and remove enhancement (Wild and Probabilities excluded)
+* [X] Epoch - Select an enhanced card. Convert its enhancement to a permanent bonus (Wild and Probabilities excluded)
 * [X] Apport - Creates up to two random Spectral cards
+* [X] Geist - Select up to four cards, convert them into a random selected card
 
 ## Why is this?
 
