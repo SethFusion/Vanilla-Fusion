@@ -17,7 +17,7 @@ SMODS.Consumable({
   key = 'epoch',
   atlas = 'VFAtlas',
   pos = { x = 8, y = 3 },
-  cost = 6,
+  cost = 4,
   discovered = false,
   loc_vars = function(self, info_queue)
     return {}
@@ -70,5 +70,7 @@ SMODS.Consumable({
     
     -- add buffed sticker visual
     selected.ability['vfusion_buffed'] = 'vfusion_buffed'
+    
+    G.hand:unhighlight_all()
   end
 })

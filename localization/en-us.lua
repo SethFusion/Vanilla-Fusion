@@ -295,10 +295,9 @@ return {
       c_vfusion_epoch={
         name='Epoch',
         text={
-          "Select an {C:attention}enhanced card{}.",
-          " Add it's enhancement",
-          "as a {C:attention}permanent bonus{}",
-          " and remove enhancement",
+          "Select an {C:attention}enhanced card{},",
+          "convert its enhancement",
+          "to a {C:attention}permanent bonus{}",
           "{C:inactive}(Wild and Probabilities excluded){}"
         }
       },
@@ -308,6 +307,14 @@ return {
           "Creates up to {C:attention}2",
           "random {C:spectral}Spectral{} cards",
           "{C:inactive}(Must have room)"
+        }
+      },
+      c_vfusion_geist={
+        name='Geist',
+        text={
+          "Select up to {C:attention}4{} cards,",
+          "convert them into a",
+          "{C:attention}random{} selected card"
         }
       }
     }

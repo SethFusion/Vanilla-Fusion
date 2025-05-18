@@ -7,7 +7,7 @@ SMODS.Consumable({
   key = "dredge",
   atlas = 'VFAtlas',
   pos = { x = 9, y = 3 },
-  cost = 6,
+  cost = 4,
   discovered = false,
   loc_vars = function(self, info_queue)
     return {}
