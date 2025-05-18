@@ -3,9 +3,54 @@
 -- not granted by an enhancement, edition, or seal
 SMODS.Sticker({
   key = 'buffed',
-  atlas = 'VFAtlas',
+  atlas = 'VFStickers',
   badge_colour = HEX('84c5d2'),
-  pos = { x = 6, y = 3 },
+  pos = { x = 0, y = 0 },
+  rate = 0.0
+})
+
+SMODS.Sticker({
+  key = 'b_chips',
+  atlas = 'VFStickers',
+  hide_badge = true,
+  no_collection = true,
+  pos = { x = 1, y = 0 },
+  rate = 0.0
+})
+
+SMODS.Sticker({
+  key = 'b_mult',
+  atlas = 'VFStickers',
+  hide_badge = true,
+  no_collection = true,
+  pos = { x = 2, y = 0 },
+  rate = 0.0
+})
+
+SMODS.Sticker({
+  key = 'b_x_mult',
+  atlas = 'VFStickers',
+  hide_badge = true,
+  no_collection = true,
+  pos = { x = 3, y = 0 },
+  rate = 0.0
+})
+
+SMODS.Sticker({
+  key = 'b_h_x_mult',
+  atlas = 'VFStickers',
+  hide_badge = true,
+  no_collection = true,
+  pos = { x = 4, y = 0 },
+  rate = 0.0
+})
+
+SMODS.Sticker({
+  key = 'b_dollars',
+  atlas = 'VFStickers',
+  hide_badge = true,
+  no_collection = true,
+  pos = { x = 5, y = 0 },
   rate = 0.0
 })
 
@@ -40,27 +85,37 @@ SMODS.Consumable({
   use = function(card, area, copier)
     local selected = G.hand.highlighted[1]
     
+    -- add buffed sticker visual
+    selected.ability['vfusion_buffed'] = 'vfusion_buffed'
+    
+    
     if selected.ability.effect == 'Bonus Card' then
       selected.ability.perma_bonus = selected.ability.perma_bonus + 30
+      selected.ability['vfusion_b_chips'] = 'vfusion_b_chips'
       
     elseif selected.ability.effect == 'Mult Card' then
       selected.ability.perma_mult = selected.ability.perma_mult + 4
+      selected.ability['vfusion_b_mult'] = 'vfusion_b_mult'
       
     elseif selected.ability.effect == 'Glass Card' and selected.ability.perma_x_mult == 0 then
       selected.ability.perma_x_mult = selected.ability.perma_x_mult + 1
+      selected.ability['vfusion_b_x_mult'] = 'vfusion_b_x_mult'
     elseif selected.ability.effect == 'Glass Card' and selected.ability.perma_x_mult > 0 then
       selected.ability.perma_x_mult = selected.ability.perma_x_mult + 2
       
     elseif selected.ability.effect == 'Steel Card' and selected.ability.perma_h_x_mult == 0 then
       selected.ability.perma_h_x_mult = selected.ability.perma_h_x_mult + 0.5
+      selected.ability['vfusion_b_h_x_mult'] = 'vfusion_b_h_x_mult'
     elseif selected.ability.effect == 'Steel Card' and selected.ability.perma_h_x_mult >= 0 then
       selected.ability.perma_h_x_mult = selected.ability.perma_h_x_mult + 1.5
       
     elseif selected.ability.effect == 'Stone Card' then
       selected.ability.perma_bonus = selected.ability.perma_bonus + 50
+      selected.ability['vfusion_b_chips'] = 'vfusion_b_chips'
       
     elseif selected.ability.effect == 'Gold Card' then
       selected.ability.perma_h_dollars = selected.ability.perma_h_dollars + 3
+      selected.ability['vfusion_b_dollars'] = 'vfusion_b_dollars'
     end
     
     play_sound('tarot1')
@@ -68,8 +123,7 @@ SMODS.Consumable({
     -- remove whatever enhanement the card has
     selected:set_ability(G.P_CENTERS['c_base'])
     
-    -- add buffed sticker visual
-    selected.ability['vfusion_buffed'] = 'vfusion_buffed'
+    
     
     G.hand:unhighlight_all()
   end

@@ -5,6 +5,13 @@ SMODS.Atlas {
   py = 95,
 }
 
+SMODS.Atlas {
+  key = "VFStickers",
+  path = "VFStickers.png",
+  px = 71,
+  py = 95,
+}
+
 --SMODS.Atlas {
 --  key = "VFEditionAtlas",
 --  path = "VFEnhance.png",

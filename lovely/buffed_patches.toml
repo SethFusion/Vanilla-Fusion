@@ -13,6 +13,7 @@ match_indent = true
 position = 'after'
 payload = '''-- vf_patch buffed
 context.other_card.ability['vfusion_buffed'] = 'vfusion_buffed'
+context.other_card.ability['vfusion_b_chips'] = 'vfusion_b_chips'
 -- / vf_patch buffed patch'''
 
 # this patches copy_card to correctly copy sticker
@@ -27,5 +28,10 @@ match_indent = true
 position = 'after'
 payload = '''-- vf_patch buffed
 new_card.ability['vfusion_buffed'] = other.ability['vfusion_buffed'] or nil
+new_card.ability['vfusion_b_chips'] = other.ability['vfusion_b_chips'] or nil
+new_card.ability['vfusion_b_mult'] = other.ability['vfusion_b_mult'] or nil
+new_card.ability['vfusion_b_x_mult'] = other.ability['vfusion_b_x_mult'] or nil
+new_card.ability['vfusion_b_h_x_mult'] = other.ability['vfusion_b_h_x_mult'] or nil
+new_card.ability['vfusion_b_dollars'] = other.ability['vfusion_b_dollars'] or nil
 -- / vf_patch buffed patch'''
 
