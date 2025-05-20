@@ -147,12 +147,11 @@ return {
           "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
         }
       },
-      j_vfusion_high_roller = {
-        name = 'High Roller',
+      j_vfusion_precious_joker = {
+        name = 'Precious Joker',
         text = {
-          "{X:mult,C:white}X1{} Mult for every",
-          "{C:gold}$100{} you have",
-          "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+          "{C:attention}Steel Cards{} are considered {C:attention}Gold",
+          "{C:attention}Gold Cards{} are considered {C:attention}Steel"
         }
       },
       j_vfusion_midway = {

@@ -109,8 +109,8 @@ pattern = '''if self.ability.name == 'Golden Ticket' and
 match_indent = true
 position = 'after'
 payload = '''-- vf_patch dead_letters
-table.insert(G.GAME.dead_letters_buffer, self.ability.extra)
--- / vf_patch dead_letters'''
+    table.insert(G.GAME.dead_letters_buffer, self.ability.extra)
+    -- / vf_patch dead_letters'''
 
 # Faceless Joker
 [[patches]]

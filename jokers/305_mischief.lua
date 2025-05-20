@@ -14,6 +14,7 @@ SMODS.Joker {
   rarity = 4,
   atlas = 'VFAtlas',
   pos = { x = 4, y = 1 },
+  soul_pos = { x = 9, y = 1 },
   cost = 10,
   loc_vars = function(self, info_queue, card)
     return { vars = { card.ability.extra.mult_gain,
