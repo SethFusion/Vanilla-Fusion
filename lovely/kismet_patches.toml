@@ -67,3 +67,25 @@ position = 'before'
 payload = '''-- vf_patch kismet
 if self.ability.name == 'The Hanged Man' and G.GAME.kismet then return false end
 -- / vf_patch kismet'''
+
+# trading card
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if self.ability.name == 'Trading Card' and not context.blueprint and '''
+match_indent = true
+position = 'at'
+payload = '''-- vf_patch kismet
+if not G.GAME.kismet and self.ability.name == 'Trading Card' and not context.blueprint and 
+-- / vf_patch kismet'''
+
+# sixth sense
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''elseif context.destroying_card and not context.blueprint then'''
+match_indent = true
+position = 'at'
+payload = '''-- vf_patch kismet
+elseif not G.GAME.kismet and context.destroying_card and not context.blueprint then
+-- / vf_patch kismet'''
