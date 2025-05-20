@@ -1,0 +1,62 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# patches apply_ability
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if center.consumeable then 
+        self.ability.consumeable = center.config
+    end'''
+match_indent = true
+position = 'before'
+payload = '''-- vf_patch precious
+if G.GAME.precious then
+  if self.ability.effect == 'Steel Card' then
+    self.ability.h_dollars = 3
+  elseif self.ability.effect == 'Gold Card' then
+    self.ability.h_x_mult = 1.5
+  end
+end
+-- / vf_patch precious'''
+
+# patches Steel Joker
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if SMODS.has_enhancement(v, 'm_steel') then self.ability.steel_tally = self.ability.steel_tally+1 end'''
+match_indent = true
+position = 'at'
+payload = '''-- vf_patch precious
+if SMODS.has_enhancement(v, 'm_steel') or (G.GAME.precious and SMODS.has_enhancement(v, 'm_gold')) then self.ability.steel_tally = self.ability.steel_tally+1 end
+-- / vf_patch precious'''
+
+# patches Golden Ticket
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if self.ability.name == 'Golden Ticket' and
+                    SMODS.has_enhancement(context.other_card, 'm_gold') then
+                        G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + self.ability.extra
+                        G.E_MANAGER:add_event(Event({func = (function() G.GAME.dollar_buffer = 0; return true end)}))
+                        return {
+                            dollars = self.ability.extra,
+                            card = self
+                        }
+                    end'''
+match_indent = true
+position = 'after'
+payload = '''-- vf_patch precious
+if G.GAME.precious and self.ability.name == 'Golden Ticket' and
+SMODS.has_enhancement(context.other_card, 'm_steel') then
+    table.insert(G.GAME.dead_letters_buffer, 4)
+    G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + 4
+    G.E_MANAGER:add_event(Event({func = (function() G.GAME.dollar_buffer = 0; return true end)}))
+    return {
+        dollars = 4,
+        card = self
+    }
+end
+-- / vf_patch precious'''
